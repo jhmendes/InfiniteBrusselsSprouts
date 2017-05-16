@@ -1,16 +1,13 @@
 // YOUR CODE GOES HERE
-// when you click on the link, it should append x amount
-// more tweets to the existing page instead of going to a new page
+  let page = 2;
 
 $('.more-sprouts').on('click', (event) => {
   event.preventDefault();
 
-  let page = 1;
-  page++;
-
   let request = $.ajax({
     method: 'GET',
     url: '/tweets.json?page=' + page
+    // how would you know to put this here?
   })
 
   request.done((tweets) => {
@@ -21,6 +18,9 @@ $('.more-sprouts').on('click', (event) => {
             <div class="body">${tweet.text}</div>
             <div class="user">${tweet.username}</div>
           </li>`);
+          // if its a string literal, it will append like shown? instead of one line?
+
     })
   })
+  page++;
 });

@@ -1,6 +1,7 @@
 require "sinatra"
 require "csv"
 require "json"
+require 'pry'
 
 set :bind, '0.0.0.0'  # bind to all interfaces
 
@@ -25,13 +26,13 @@ def page(page_param)
   end
 end
 
+get "/tweets.json" do
+  content_type :json
+  tweets(page(params[:page])).to_json
+end
+
 get "/tweets" do
   @page = page(params[:page])
   @tweets = tweets(@page)
   erb :index
-end
-
-get "/tweets.json" do
-  content_type :json
-  tweets(page(params[:page])).to_json
 end
